@@ -57,6 +57,7 @@ export default {
         signup() {
             firebase.auth().createUserWithEmailAndPassword(this.email_id, this.password).then((user) =>{
                 console.log(user)
+                this.$router.replace('/favourites');
             })
             .catch((error) => {
                 console.log(error)

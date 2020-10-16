@@ -50,6 +50,7 @@ export default {
             firebase.auth().signInWithEmailAndPassword(this.email_id, this.password)
             .then((user) => {
                 console.log(user)
+                this.$router.replace('favourites')
             })
             .catch((error) => {
                 console.log(error)

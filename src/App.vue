@@ -17,21 +17,33 @@
 
 
 <script>
+import firebase from 'firebase';
 export default {
   data () {
     return {
-      isUserLoggedIn: null
+      isUserLoggedIn: false
     }
   },
   created () {
-      
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.isUserLoggedIn = true;
+        } else {
+          this.isUserLoggedIn = false;
+        }
+    });
   },
   methods: {
     logIn() {
       this.isUserLoggedIn = true
     },
     logOut() {
+      
+      firebase.auth().signOut();
+      console.log("Logged Out")
       this.isUserLoggedIn = false
+      this.$router.replace("/")
+      
       
     }
   }
