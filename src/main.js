@@ -2,13 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import jQuery from 'jquery';
+import jQuery from 'jquery'
 import VeeValidate from 'vee-validate';
 import notie from 'notie'
 import NProgress from 'nprogress';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.css';
-
 import axios from 'axios';
 
 global.$ = global.jQuery = jQuery;

@@ -1,7 +1,43 @@
 <template>
-  <div class="search">
-    <h1 class="teal">This is search by date page</h1>
-    <h4>Use the Neo - Feed api endpoint for creating a date component which takes start date and end date from the user. On selecting the dates you need to display a list of asteroids based on their closest approach date to Earth. (10 items in the list as per their closest approach)</h4>
+  <div class="search container">
+    <hr>
+    <div class="row">
+        <div class="col s12 m6 offset-l3">
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">Search By Date</span>
+                <label for="start_date">Start Date</label>
+                <input type="text" class="datepicker" id="start_date" v-model="start_date" placeholder="YYYY-MM-DD">
+                <label for="end_date">End Date</label>
+                <input type="text" class="datepicker" id="end_date" v-model="end_date" placeholder="YYYY-MM-DD">
+            </div>
+            <div class="card-action">
+                <button class="btn" @click="searchByDate()">Search</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    
+    <div class="row" v-if="flag">
+      <hr>
+      <h3>Details</h3>
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Close Approach Date</th>
+            <th>ID</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in data" :key=item.name>
+            <td>{{item.close_approach_data[0].close_approach_date}}</td>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
@@ -11,19 +47,50 @@ export default {
 
   data () {
     return {
-      start_date: '2015-04-28',
-      end_date: '2015-04-30'
+      start_date: '',
+      end_date: '',
+      data: [],
+      flag: false
     }
   },
+
   created () {
-    let url = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=' + this.start_date + '&end_date=' + this.end_date + '&detailed=true&api_key=Iy2sbpgTZ70mVFS7Hki3hjWbyMDc3jeSrMfgdrIu';
-    window.axios.get(url)
-    .then((response) => {
-      console.log(response.data.near_earth_objects)
-    })
-    .catch((error) => {
-      console.log(error)
-    }) 
+      this.flag = false;
+      document.addEventListener('onload', function() {
+        var elems = document.querySelectorAll('.datepicker');
+        var options = {
+          format: 'yyyy-mm-dd'
+        }
+        var instances = M.Datepicker.init(elems, options);
+      }); 
+  },
+
+  methods: {
+    searchByDate () {
+      let url = 'https://api.nasa.gov/neo/rest/v1/feed?start_date=' + this.start_date + '&end_date=' + this.end_date + '&detailed=true&api_key=Iy2sbpgTZ70mVFS7Hki3hjWbyMDc3jeSrMfgdrIu';
+      window.axios.get(url)
+      .then((response) => {
+        var data = response.data.near_earth_objects
+        var x;
+        var y;
+        var nest = []
+        for(x in data) {
+          // console.log(data[x])
+          nest = data[x]
+          for(y in nest){
+            console.log(nest[y].id)
+            this.data.push(nest[y])
+          }
+          
+        }
+        
+        
+        this.flag = true;
+      })
+      .catch((error) => {
+        console.log(error)
+      }) 
+    }
   }
 }
 </script>
