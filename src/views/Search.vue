@@ -65,6 +65,8 @@
                 </tr>
             </tbody>
         </table>
+        <br>
+        <button class="btn"><i class="material-icons" v-if="!favourite">add</i><i class="material-icons" v-else>check</i></button>
     </div>
 
     
@@ -79,11 +81,12 @@ export default {
         return {
             id: null,
             flag: false,
-            data: {}
+            data: {},
+            favourite: false
         }
     },
     created () {
-        this.flag = false
+        this.flag = false;
     },
     methods: {
         searchById () {

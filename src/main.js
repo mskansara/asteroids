@@ -9,6 +9,7 @@ import NProgress from 'nprogress';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.css';
 import axios from 'axios';
+import firebase from 'firebase/app';
 
 global.$ = global.jQuery = jQuery;
 window.NProgress = NProgress;
@@ -19,6 +20,20 @@ window.axios.defaults.headers.common = {
     'X-Requested-With': 'XMLHttpRequest',
 };
 window.Vue = Vue;
+
+// Firebase
+var firebaseConfig = {
+  apiKey: "AIzaSyDmNCtklEycXpnZCgnPtnjoMMsQSrhbh9o",
+  authDomain: "asteroids-bcc44.firebaseapp.com",
+  databaseURL: "https://asteroids-bcc44.firebaseio.com",
+  projectId: "asteroids-bcc44",
+  storageBucket: "asteroids-bcc44.appspot.com",
+  messagingSenderId: "940174327923",
+  appId: "1:940174327923:web:69d2ccd7364febe971aa06",
+  measurementId: "G-4C3CJP0XXH"
+};
+firebase.initializeApp(firebaseConfig);
+
 
 router.beforeEach((to, from, next) => {
   window.NProgress.start();

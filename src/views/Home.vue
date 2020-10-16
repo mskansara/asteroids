@@ -13,6 +13,7 @@
           <th>Estimated Diameter (in kilometers)</th>
           <th>Estimated Diameter (in miles)</th>
           <th>Data Arc (in days)</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -27,6 +28,7 @@
             <td>Min:{{item.estimated_diameter.kilometers.estimated_diameter_min}}, Max:{{item.estimated_diameter.kilometers.estimated_diameter_max}}</td>
             <td>Min:{{item.estimated_diameter.miles.estimated_diameter_min}}, Max:{{item.estimated_diameter.miles.estimated_diameter_max}}</td>
             <td>{{item.orbital_data.data_arc_in_days}}</td>
+            <td><button class="btn"><i class="material-icons">add</i></button></td>
         </tr>
       </tbody>
     </table>
