@@ -11,6 +11,7 @@ import 'materialize-css/dist/css/materialize.css';
 import axios from 'axios';
 import firebase from 'firebase/app';
 
+
 global.$ = global.jQuery = jQuery;
 window.NProgress = NProgress;
 window.NProgress.configure({ showSpinner: false });
@@ -47,20 +48,20 @@ new Vue({
   render: function (h) { return h(App) }
 }).$mount('#app')
 
-// window.success = (message) => {
-//   window.notie.alert({
-//       text: message,
-//       type: 'success',
-//       position: 'bottom'
-//   });
-// };
-// window.error = (message) => {
-//   window.notie.alert({
-//       text: message,
-//       type: 'error',
-//       position: 'bottom'
-//   });
-// };
+window.success = (message) => {
+  window.notie.alert({
+      text: message,
+      type: 'success',
+      position: 'bottom'
+  });
+};
+window.error = (message) => {
+  window.notie.alert({
+      text: message,
+      type: 'error',
+      position: 'bottom'
+  });
+};
 // window.info = (message) => {
 //   window.notie.alert({
 //       text: message,
@@ -69,9 +70,9 @@ new Vue({
 //   });
 // };
 
-// window.$(document).ready(() => {
-//   window.NProgress.done();
-// });
+window.$(document).ready(() => {
+  window.NProgress.done();
+});
 
 // window.logError = (response) => {
 //   window.NProgress.done();

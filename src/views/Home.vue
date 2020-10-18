@@ -13,7 +13,6 @@
           <th>Estimated Diameter (in kilometers)</th>
           <th>Estimated Diameter (in miles)</th>
           <th>Data Arc (in days)</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -28,7 +27,6 @@
             <td>Min:{{item.estimated_diameter.kilometers.estimated_diameter_min}}, Max:{{item.estimated_diameter.kilometers.estimated_diameter_max}}</td>
             <td>Min:{{item.estimated_diameter.miles.estimated_diameter_min}}, Max:{{item.estimated_diameter.miles.estimated_diameter_max}}</td>
             <td>{{item.orbital_data.data_arc_in_days}}</td>
-            <td><button class="btn" @click="addToFavourite(item)"><i class="material-icons">add</i></button></td>
         </tr>
       </tbody>
     </table>
@@ -41,24 +39,13 @@
   import firebase from 'firebase';
   export default {
     name: 'Home',
+
     data () {
       return {
-        data: {
-            // id: null,
-            // is_potentially_hazardous: null,
-            // is_sentry_object: null,
-            // neo_reference_id: null,
-            // designation: null
-            // name: null,
-            // estimated_diameter_kilometer: null,
-            // estimated_diameter_miles: null,
-            // estimated_diameter_feet: null,
-            // close_approach_date: null,
-            // data_arc_in_days: null
-        },
-        
+        data: {},
       }
     },
+
     created () {
       let url = 'https://api.nasa.gov/neo/rest/v1/neo/browse?page=0&size=10&api_key=Iy2sbpgTZ70mVFS7Hki3hjWbyMDc3jeSrMfgdrIu'
       window.axios.get(url)
@@ -66,6 +53,7 @@
         this.data = response.data.near_earth_objects
       })
     },
+
     methods: {
       addToFavourite(item) {
         var user = firebase.auth().currentUser;

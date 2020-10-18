@@ -6,13 +6,14 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">Search By Date</span>
-                <label for="start_date">Start Date</label>
-                <input type="text" class="datepicker" id="start_date" v-model="start_date" placeholder="YYYY-MM-DD">
-                <label for="end_date">End Date</label>
-                <input type="text" class="datepicker" id="end_date" v-model="end_date" placeholder="YYYY-MM-DD">
-            </div>
-            <div class="card-action">
-                <button class="btn" @click="searchByDate()">Search</button>
+                <form v-on:submit.prevent="searchByDate">
+                   <label for="start_date">Start Date</label>
+                  <input type="text" class="datepicker" id="start_date" v-model="start_date" placeholder="YYYY-MM-DD" required>
+                  <label for="end_date">End Date</label>
+                  <input type="text" class="datepicker" id="end_date" v-model="end_date" placeholder="YYYY-MM-DD" required>
+                  <button class="btn">Search</button>
+                </form>
+               
             </div>
         </div>
         </div>
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2';
 export default {
   name: "Search-By-Date",
 
@@ -78,17 +80,19 @@ export default {
           // console.log(data[x])
           nest = data[x]
           for(y in nest){
-            console.log(nest[y].id)
+            // console.log(nest[y].id)
             this.data.push(nest[y])
           }
-          
         }
-        
         
         this.flag = true;
       })
       .catch((error) => {
-        console.log(error)
+        Swal.fire({
+          title: 'Error',
+          icon: 'error',
+          timer: 5000
+        })
       }) 
     }
   }

@@ -18,6 +18,7 @@
 
 <script>
 import firebase from 'firebase';
+import Swal from 'sweetalert2';
 export default {
   data () {
     return {
@@ -42,6 +43,11 @@ export default {
       firebase.auth().signOut();
       console.log("Logged Out")
       this.isUserLoggedIn = false
+      Swal.fire({
+          title: 'Logged Out',
+          icon: 'success',
+          timer: 5000
+      })
       this.$router.replace("/")
       
       

@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="input-field col l12 m12 s12 black-text">
                                     <i class="material-icons prefix teal-text">mail_outline</i>
-                                    <input name="email_id" type="text" id="email" class="validate" v-model="email_id">
+                                    <input name="email_id" type="text" id="email" class="validate" v-model="email_id" required>
                                     <label for="email_id">Email ID</label>
 
                                 </div>
@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="input-field col l12 m12 s12 black-text">
                                     <i class="material-icons prefix teal-text">fingerprint</i>
-                                    <input name="password" type="password" id="password" class="validate" autocomplete="off" v-model="password">
+                                    <input name="password" type="password" id="password" class="validate" autocomplete="off" v-model="password" required>
                                     <label for="password">Password</label>
                                 </div>
                             </div>
@@ -38,6 +38,7 @@
 
 <script>
 import firebase from 'firebase';
+import Swal from 'sweetalert2';
 export default {
     data() {
         return {
@@ -49,11 +50,19 @@ export default {
         login() {
             firebase.auth().signInWithEmailAndPassword(this.email_id, this.password)
             .then((user) => {
-                console.log(user)
                 this.$router.replace('favourites')
+                Swal.fire({
+                    title: 'Logged In',
+                    icon: 'success',
+                    timer: 5000
+                })
             })
             .catch((error) => {
-                console.log(error)
+                Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    timer: 5000
+                })
             })
         }
     }
